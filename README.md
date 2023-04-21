@@ -1,4 +1,4 @@
-## chemistry laboratory database project
+## Features
 - create database scrypt
 - insert test data
 - many different selects
