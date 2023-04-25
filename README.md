@@ -1,7 +1,28 @@
-## chemistry laboratory database project
-- create database scrypt
-- insert test data
-- many different selects
-## to do
+## Features
+- скрипт создания базы данных
+- скрипт для заполнения тестовыми данными
+- выборки по различным условиям разного уровня сложности
+
+## Перед запуском
+- в файл .env добавьте следующие переменные для подключения к базе, можно изменить .env.example на .env
+```
+    MYSQL_ROOT_PASSWORD=
+    MYSQL_DATABASE=
+```
+
+## Для запуска
+```bash
+    docker compose up --build -d
+```
+
+## TODO:
 - triggers
 - procedures
+
+## Концептуальная схема
+
+
+## Логическая схема
+
+
+## Физическая схема
