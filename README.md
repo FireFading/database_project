@@ -1,4 +1,5 @@
 ## Features
+- [описание предметной области](description_subject_area.pdf)
 - [концептуальная схема](diagrams/conceptual.pdf)
 - [логическая схема](diagrams/logical.pdf)
 - [физическая схема](diagrams/physical.pdf)
