@@ -1,6 +1,8 @@
+USE chemistry;
+
 -- Insert data into DangerClass table
 INSERT INTO
-    chemistry.DangerClass (id, degree_name)
+    DangerClass (id, degree_name)
 VALUES
     (1, 'Highly toxic'),
     (2, 'Moderately toxic'),
@@ -8,7 +10,7 @@ VALUES
 
 -- Insert data into Category table
 INSERT INTO
-    chemistry.Category (id, title, features, danger_class_id)
+    Category (id, title, features, danger_class_id)
 VALUES
     (1, 'Acids', 'Sour taste, corrodes metals', 1),
     (2, 'Alkalis', 'Bitter taste, slippery feel', 1),
@@ -21,7 +23,7 @@ VALUES
 
 -- Insert data into ChemicalSubstance table
 INSERT INTO
-    chemistry.ChemicalSubstance (
+    ChemicalSubstance (
         id,
         formula,
         molecular_weight,
@@ -41,7 +43,7 @@ VALUES
 
 -- Insert data into LaboratoryAssistant table
 INSERT INTO
-    chemistry.LaboratoryAssistant (
+    LaboratoryAssistant (
         id,
         first_name,
         last_name,
@@ -75,14 +77,14 @@ VALUES
 
 -- Insert data into ChemicalReaction table
 INSERT INTO
-    chemistry.ChemicalReaction (id, purpose, laboratory_assistant_id)
+    ChemicalReaction (id, purpose, laboratory_assistant_id)
 VALUES
     (1, 100.00, 'Neutralization', 1),
     (2, 50.00, 'Extraction', 2);
 
 -- Insert data into ChemicalVersion table
 INSERT INTO
-    chemistry.ChemicalVersion (
+    ChemicalVersion (
         id,
         quantity,
         creation_time,
@@ -95,7 +97,7 @@ VALUES
 
 -- Insert data into UsedSubstance table
 INSERT INTO
-    chemistry.UsedSubstance (
+    UsedSubstance (
         id,
         amount,
         chemical_reaction_id,

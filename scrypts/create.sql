@@ -1,10 +1,10 @@
--- Schema chemistry
 CREATE SCHEMA IF NOT EXISTS chemistry DEFAULT CHARACTER
 SET
     utf8;
 
 USE chemistry;
 
+-- DangerClass - класс опасности
 CREATE TABLE
     IF NOT EXISTS chemistry.DangerClass (
         id INT NOT NULL,
@@ -12,6 +12,7 @@ CREATE TABLE
         PRIMARY KEY (id)
     );
 
+-- Category - категория химического вещества
 CREATE TABLE
     IF NOT EXISTS chemistry.Category (
         id INT NOT NULL,
@@ -22,6 +23,7 @@ CREATE TABLE
         FOREIGN KEY (danger_class_id) REFERENCES chemistry.DangerClass (id)
     );
 
+-- ChemicalSubstance - химическое вещество
 CREATE TABLE
     IF NOT EXISTS chemistry.ChemicalSubstance (
         id INT NOT NULL,
@@ -33,6 +35,7 @@ CREATE TABLE
         FOREIGN KEY (category_id) REFERENCES chemistry.Category (id)
     );
 
+-- LaboratoryAssistance - Лаборант
 CREATE TABLE
     IF NOT EXISTS chemistry.LaboratoryAssistant (
         id INT NOT NULL,
@@ -46,6 +49,7 @@ CREATE TABLE
         PRIMARY KEY (id)
     );
 
+-- ChemicalReaction - проведенная химическая реакция
 CREATE TABLE
     IF NOT EXISTS chemistry.ChemicalReaction (
         id INT NOT NULL,
@@ -56,6 +60,7 @@ CREATE TABLE
         FOREIGN KEY (laboratory_assistant_id) REFERENCES chemistry.LaboratoryAssistant (id)
     );
 
+-- ChemicalVersion - версия химического вещества
 CREATE TABLE
     IF NOT EXISTS chemistry.ChemicalVersion (
         id INT NOT NULL,
@@ -67,6 +72,7 @@ CREATE TABLE
         FOREIGN KEY (chemical_substance_id) REFERENCES chemistry.ChemicalSubstance (id)
     );
 
+-- UsedSubstance - использованное химическое вещество
 CREATE TABLE
     IF NOT EXISTS chemistry.UsedSubstance (
         id INT NOT NULL,
