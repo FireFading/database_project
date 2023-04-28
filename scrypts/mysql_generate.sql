@@ -56,7 +56,7 @@ CREATE TABLE
     `фамилия` VARCHAR(45) NOT NULL,
     `отчество` VARCHAR(45) NOT NULL,
     `телефон` VARCHAR(11) NOT NULL,
-    `год рождения` YEAR NOT NULL,
+    `день рождения` DATE NOT NULL,
     `характеристика` VARCHAR(45) NULL,
     `электронная почта` VARCHAR(45) NULL,
     PRIMARY KEY (`id`)
@@ -69,7 +69,6 @@ CREATE TABLE
   IF NOT EXISTS `chemistry`.`Проведенная химическая реакция` (
     `id` INT NOT NULL,
     `лаборант` INT NOT NULL,
-    `количество` DECIMAL(10, 6) NOT NULL,
     `назначение` VARCHAR(45) NOT NULL,
     PRIMARY KEY (`id`),
     INDEX `fk_Использование_Лаборанты1_idx` (`лаборант` ASC) VISIBLE,

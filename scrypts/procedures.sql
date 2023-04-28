@@ -1,6 +1,7 @@
 USE chemistry;
 
 -- get all reactions that are under responsibility of assistant by hist last_name
+-- получить все реакции, за которые отвечает ассистент, по его фамилии
 CREATE PROCEDURE get_chemical_reactions_by_assistant (IN assistant_last_name INT) BEGIN
 SELECT
     *
@@ -11,7 +12,9 @@ WHERE
     assistant_last_name = last_name;
 
 END
+
 -- update characteristics of assistant
+-- обновление характеристик ассистента
 CREATE PROCEDURE UpdateLaboratoryAssistantCharacteristics (
     IN assistant_last_name INT,
     IN new_characteristics VARCHAR(45)

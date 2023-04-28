@@ -53,7 +53,6 @@ CREATE TABLE
 CREATE TABLE
     IF NOT EXISTS chemistry.ChemicalReaction (
         id INT NOT NULL,
-        quantity DECIMAL(10, 6) NOT NULL,
         purpose VARCHAR(45) NOT NULL,
         laboratory_assistant_id INT NOT NULL,
         PRIMARY KEY (id),
