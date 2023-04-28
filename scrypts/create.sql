@@ -6,7 +6,7 @@ USE chemistry;
 
 -- DangerClass - класс опасности
 CREATE TABLE
-    IF NOT EXISTS chemistry.DangerClass (
+    IF NOT EXISTS DangerClass (
         id INT NOT NULL,
         degree_name VARCHAR(45) UNIQUE NOT NULL,
         PRIMARY KEY (id)
@@ -14,30 +14,30 @@ CREATE TABLE
 
 -- Category - категория химического вещества
 CREATE TABLE
-    IF NOT EXISTS chemistry.Category (
+    IF NOT EXISTS Category (
         id INT NOT NULL,
         title VARCHAR(45) UNIQUE NOT NULL,
         features VARCHAR(45) NOT NULL,
         danger_class_id INT NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (danger_class_id) REFERENCES chemistry.DangerClass (id)
+        FOREIGN KEY (danger_class_id) REFERENCES DangerClass (id)
     );
 
 -- ChemicalSubstance - химическое вещество
 CREATE TABLE
-    IF NOT EXISTS chemistry.ChemicalSubstance (
+    IF NOT EXISTS ChemicalSubstance (
         id INT NOT NULL,
         formula VARCHAR(255) NOT NULL,
         molecular_weight DECIMAL(10, 6) NOT NULL,
         specification VARCHAR(255) NULL,
         category_id INT NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (category_id) REFERENCES chemistry.Category (id)
+        FOREIGN KEY (category_id) REFERENCES Category (id)
     );
 
 -- LaboratoryAssistance - Лаборант
 CREATE TABLE
-    IF NOT EXISTS chemistry.LaboratoryAssistant (
+    IF NOT EXISTS LaboratoryAssistant (
         id INT NOT NULL,
         first_name VARCHAR(45) NOT NULL,
         last_name VARCHAR(45) NOT NULL,
@@ -51,35 +51,35 @@ CREATE TABLE
 
 -- ChemicalReaction - проведенная химическая реакция
 CREATE TABLE
-    IF NOT EXISTS chemistry.ChemicalReaction (
+    IF NOT EXISTS ChemicalReaction (
         id INT NOT NULL,
         purpose VARCHAR(45) NOT NULL,
         laboratory_assistant_id INT NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (laboratory_assistant_id) REFERENCES chemistry.LaboratoryAssistant (id)
+        FOREIGN KEY (laboratory_assistant_id) REFERENCES LaboratoryAssistant (id)
     );
 
 -- ChemicalVersion - версия химического вещества
 CREATE TABLE
-    IF NOT EXISTS chemistry.ChemicalVersion (
+    IF NOT EXISTS ChemicalVersion (
         id INT NOT NULL,
         quantity DECIMAL(10, 6) NOT NULL,
         creation_time TIMESTAMP NOT NULL,
         expiration_time DATETIME NOT NULL,
         chemical_substance_id INT NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (chemical_substance_id) REFERENCES chemistry.ChemicalSubstance (id)
+        FOREIGN KEY (chemical_substance_id) REFERENCES ChemicalSubstance (id)
     );
 
 -- UsedSubstance - использованное химическое вещество
 CREATE TABLE
-    IF NOT EXISTS chemistry.UsedSubstance (
+    IF NOT EXISTS UsedSubstance (
         id INT NOT NULL,
         amount DECIMAL(10, 6) NOT NULL,
         chemical_reaction_id INT NOT NULL,
         chemical_version_id INT NOT NULL,
         time TIMESTAMP NOT NULL,
         PRIMARY KEY (id),
-        FOREIGN KEY (chemical_reaction_id) REFERENCES chemistry.ChemicalReaction (id),
-        FOREIGN KEY (chemical_version_id) REFERENCES chemistry.ChemicalVersion (id)
+        FOREIGN KEY (chemical_reaction_id) REFERENCES ChemicalReaction (id),
+        FOREIGN KEY (chemical_version_id) REFERENCES ChemicalVersion (id)
     );
