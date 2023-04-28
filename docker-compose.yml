@@ -9,6 +9,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
+      - mysql_data:/var/lib/mysql
       - ./scrypts/create.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - app-network
@@ -16,3 +17,6 @@ services:
 networks:
   app-network:
     driver: bridge
+
+volumes:
+  mysql_data:
