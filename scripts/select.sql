@@ -38,7 +38,6 @@ FROM
 -- Retrieve all the chemical reactions with their quantity, purpose, and the laboratory assistant responsible for it:
 -- Получение всех проведенных химических реакций с лаборантами, ответственными за проведение
 SELECT
-    quantity,
     purpose,
     first_name,
     last_name
@@ -114,17 +113,6 @@ FROM
     INNER JOIN DangerClass d ON c.danger_class_id = d.id
 WHERE
     c.title IS NOT NULL;
-
--- Retrieve all chemical reactions with a quantity greater than or equal to 5 and the purpose "research":
-SELECT
-    id,
-    quantity,
-    purpose
-FROM
-    ChemicalReaction
-WHERE
-    quantity >= 5
-    AND purpose = 'research';
 
 -- Retrieve all chemical substances that have an expiration time before name
 -- Получение всех химических веществ с истекшим сроком годности
