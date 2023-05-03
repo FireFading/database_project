@@ -24,5 +24,17 @@ SET
     characteristics = new_characteristics
 WHERE
     last_name = assistant_last_name;
+END;
 
+-- insert a new ChemicalSubstance
+-- добавление записи о новом химическом веществе
+CREATE PROCEDURE InsertChemicalSubstance(
+    IN p_formula VARCHAR(255),
+    IN p_molecular_weight DECIMAL(10, 6),
+    IN p_specification VARCHAR(255),
+    IN p_category_id INT
+)
+BEGIN
+    INSERT INTO ChemicalSubstance (formula, molecular_weight, specification, category_id)
+    VALUES (p_formula, p_molecular_weight, p_specification, p_category_id);
 END;

@@ -3,11 +3,11 @@
 - [концептуальная схема](diagrams/conceptual.pdf)
 - [логическая схема](diagrams/logical.png)
 - [физическая схема](diagrams/physical.png)
-- [скрипт создания базы данных](scrypts/create.sql)
-- [скрипт для заполнения тестовыми данными](scrypts/insert.sql)
-- [выборки по различным условиям разного уровня сложности](scrypts/select.sql)
-- [триггеры по бизнес-правилам](scrypts/triggers.sql)
-- [процедуры](scrypts/procedures.sql)
+- [скрипт создания базы данных](scripts/create.sql)
+- [скрипт для заполнения тестовыми данными](scripts/insert.sql)
+- [выборки по различным условиям разного уровня сложности](scripts/select.sql)
+- [триггеры по бизнес-правилам](scripts/triggers.sql)
+- [процедуры](scripts/procedures.sql)
 
 ## Перед запуском
 - в файл .env добавьте следующие переменные для подключения к базе, можно изменить .env.example на .env

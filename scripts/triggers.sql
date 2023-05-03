@@ -1,13 +1,13 @@
 USE chemistry;
 
--- update amount of chemical substance when add new used substance record
+-- update quantity of chemical substance when add new used substance record
 -- обновление количества версии химического вещества после добавления записи в таблицу использованных веществ
 CREATE TRIGGER update_chemical_version_amount AFTER INSERT ON UsedSubstance FOR EACH ROW BEGIN DECLARE new_amount DECIMAL(10, 6);
 
 SET
     new_amount = (
         SELECT
-            amount
+            quantity
         FROM
             ChemicalVersion
         WHERE
@@ -19,25 +19,6 @@ SET
     quantity = new_amount
 WHERE
     id = NEW.chemical_version_id;
-
-END;
-
--- prevent adding UsedSubstance instance if laborant is under 21 years old
--- предотвращение выдачи вещества, если лаборант моложе 21 года
-CREATE TRIGGER prevent_underage_laboratory_assistant BEFORE INSERT ON UsedSubstance FOR EACH ROW BEGIN DECLARE laborant_age INT;
-
-SELECT
-    YEAR (CURDATE ()) - YEAR (birthday) INTO laborant_age
-FROM
-    LaboratoryAssistant
-WHERE
-    id = NEW.laboratory_assistant_id;
-
-IF laborant_age < 21 THEN SIGNAL SQLSTATE '45000'
-SET
-    MESSAGE_TEXT = 'Cannot add UsedSubstance instance. The LaboratoryAssistant is under 21 years old.';
-
-END IF;
 
 END;
 
@@ -56,14 +37,17 @@ WHERE
 
 IF danger_class_name = 'Highly toxic' THEN SIGNAL SQLSTATE '45000'
 SET
-    MESSAGE_TEXT = 'Cannot add UsedSubstance instance. The ChemicalSubstance has a DangerClass of "Highly toxic".';
+    MESSAGE_TEXT = CONCAT (
+        'Cannot add UsedSubstance instance. The ChemicalSubstance has a DangerClass of "Highly toxic". ChemicalVersion ID: ',
+        NEW.chemical_version_id
+    );
 
 END IF;
 
 END;
 
--- check expiration date before create UsedSubstance record
--- проверка срока годности вещества перед выдачей в использование
+-- -- check expiration date before create UsedSubstance record
+-- -- проверка срока годности вещества перед выдачей в использование
 CREATE TRIGGER check_chemical_version_expiration BEFORE INSERT ON chemistry.UsedSubstance FOR EACH ROW BEGIN DECLARE version_expiration DATETIME;
 
 SELECT
