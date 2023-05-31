@@ -3,7 +3,6 @@ USE chemistry;
 -- update quantity of chemical substance when add new used substance record
 -- обновление количества версии химического вещества после добавления записи в таблицу использованных веществ
 CREATE TRIGGER update_chemical_version_amount AFTER INSERT ON UsedSubstance FOR EACH ROW BEGIN DECLARE new_amount DECIMAL(10, 6);
-
 SET
     new_amount = (
         SELECT
@@ -19,7 +18,24 @@ SET
     quantity = new_amount
 WHERE
     id = NEW.chemical_version_id;
+END;
 
+-- check if the quantity of the ChemicalVersion is less than 0 before inserting a new UsedSubstance record
+-- проверка меньше ли количество ChemicalVersion 0, прежде чем вставлять новую запись UsedSubstance
+CREATE TRIGGER check_quantity_of_chemical_version1 BEFORE INSERT ON UsedSubstance FOR EACH ROW BEGIN DECLARE new_amount DECIMAL(10, 6);
+SET
+    new_amount = (
+        SELECT
+            quantity
+        FROM
+            ChemicalVersion
+        WHERE
+            id = NEW.chemical_version_id
+    ) - NEW.amount;
+IF new_amount < 0 THEN SIGNAL SQLSTATE '45000'
+SET
+    MESSAGE_TEXT = 'Cannot create UsedSubstance instance. The quantity of the ChemicalVersion is less than 0.';
+END IF;
 END;
 
 -- check the danger class of the ChemicalSubstance before inserting a new UsedSubstance record
